@@ -2,6 +2,8 @@
 Aplicativo de Simulados personalizados, cliente que define, o que será realizado de questões.
 
 Aventuras do Conhecimento
+
+
 Sobre o Projeto
 Aventuras do Conhecimento é uma plataforma de aprendizagem gamificada, desenvolvida como uma Single Page Application (SPA) com React e PHP. O objetivo é transformar o estudo para concursos e provas numa experiência interativa e envolvente, utilizando quizzes, jogos de simulação e um sistema de progressão de níveis para motivar os utilizadores.
 
