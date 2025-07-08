@@ -18,7 +18,7 @@ Jogo Educativo: Um mini-jogo de gestão de projetos onde as suas decisões afeta
 
 Dashboard de Progresso: Acompanhe o seu desempenho com estatísticas de exercícios concluídos, taxa de acerto e um gráfico de progresso para o próximo nível.
 
-Sistema de Níveis: Progrida através dos níveis (Iniciante, Intermediario, Avancado, Perito) ao atingir metas de desempenho.
+Sistema de Níveis: Progrida através dos níveis (Iniciante, Intermediario, Perito) ao atingir metas de desempenho.
 
 Gestão de Perfil: Os utilizadores podem editar as suas informações pessoais e apagar a sua conta.
 
