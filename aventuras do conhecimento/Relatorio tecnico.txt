@@ -1,8 +1,7 @@
 Relatório Técnico: Plataforma "Aventuras do Conhecimento"
 Data: 08 de Julho de 2025
 Versão do Documento: 1.0
-Autor: André (Desenvolvedor)
-
+Autor: Marcelo
 1. Resumo do Projeto
 O projeto "Aventuras do Conhecimento" consiste no desenvolvimento de uma plataforma de aprendizagem gamificada (gamified learning), concebida como uma Single Page Application (SPA). O objetivo principal é fornecer aos utilizadores uma ferramenta interativa e envolvente para testar e aprimorar os seus conhecimentos através de quizzes e jogos de simulação, com um sistema de progressão baseado em níveis e desempenho.
 
