@@ -108,3 +108,6 @@ Melhorias de Acesso: Alterar o login para email e senha e adicionar a funcionali
 Funcionalidades Sociais: Desenvolver um "Modo Competição" com rankings e permitir a partilha de resultados.
 
 Expansão de Conteúdo: Adicionar mais matérias e um sis
+
+
+link do jira https://estudantes-team-mbd77gg1.atlassian.net/jira/software/projects/KAN/list
