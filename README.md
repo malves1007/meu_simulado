@@ -63,7 +63,7 @@ Node.js e npm instalados.
 1. Configuração do Back-end
 Clone o repositório:
 
-git clone https://github.com/seu-usuario/aventuras-do-conhecimento.git
+git clone (https://github.com/malves1007/meu_simulado?tab=readme-ov-file)
 
 Mova a pasta do projeto para o diretório do seu servidor local (ex: C:\wamp64\www\).
 
