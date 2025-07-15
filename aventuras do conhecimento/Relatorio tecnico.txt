@@ -1,0 +1,106 @@
+Relatório Técnico: Plataforma "Aventuras do Conhecimento"
+Data: 08 de Julho de 2025
+Versão do Documento: 1.0
+Autor: André (Desenvolvedor)
+
+1. Resumo do Projeto
+O projeto "Aventuras do Conhecimento" consiste no desenvolvimento de uma plataforma de aprendizagem gamificada (gamified learning), concebida como uma Single Page Application (SPA). O objetivo principal é fornecer aos utilizadores uma ferramenta interativa e envolvente para testar e aprimorar os seus conhecimentos através de quizzes e jogos de simulação, com um sistema de progressão baseado em níveis e desempenho.
+
+A aplicação inclui um painel de administração robusto para a gestão de todo o conteúdo pedagógico, garantindo autonomia e controlo sobre as atividades propostas.
+
+2. Arquitetura da Aplicação
+A plataforma foi construída sobre uma arquitetura cliente-servidor desacoplada, o que proporciona flexibilidade e escalabilidade.
+
+2.1. Front-end (Cliente)
+O front-end é uma Single Page Application (SPA) desenvolvida integralmente em React. Esta abordagem permite uma experiência de utilizador fluida e rápida, sem a necessidade de recarregar a página a cada interação.
+
+Renderização e Roteamento: A renderização da interface e a navegação entre as diferentes "telas" (Login, Dashboard, Quiz, etc.) são geridas no lado do cliente pela biblioteca React Router.
+
+Estado da Aplicação: O estado global, como as informações do utilizador autenticado, é gerido através da Context API do React, evitando o "prop drilling" e centralizando a lógica de autenticação.
+
+Comunicação com o Back-end: Todas as interações com o servidor são feitas através de chamadas assíncronas a uma API RESTful, utilizando a fetch API do navegador, encapsulada num cliente de API (apiClient.js) para centralizar os pedidos.
+
+2.2. Back-end (Servidor)
+O back-end consiste numa API RESTful desenvolvida em PHP. A sua única responsabilidade é responder às requisições do front-end, interagir com o banco de dados e devolver os dados no formato JSON.
+
+Linguagem: PHP (versão compatível com o ambiente WAMP).
+
+Conexão com o Banco de Dados: A comunicação com o MySQL é feita exclusivamente através da extensão PDO (PHP Data Objects), que oferece uma camada de abstração e segurança (prevenção de SQL injection através de prepared statements).
+
+Estrutura da API: A API é composta por um conjunto de scripts PHP, cada um representando um "endpoint" específico para uma ação (ex: login.php, inserir_pergunta.php, buscar_progresso.php).
+
+2.3. Banco de Dados
+O sistema de persistência de dados é o MySQL, um sistema de gestão de banco de dados relacional (SGBDR) robusto e amplamente utilizado.
+
+Estrutura: O esquema do banco de dados (simulados) foi desenhado para normalizar a informação, com tabelas distintas para Usuario, Perguntas, Opcoes, RespostasUsuario, CenariosJogo e OpcoesJogo.
+
+Integridade Referencial: Foram utilizadas chaves estrangeiras (FOREIGN KEY) com a regra ON DELETE CASCADE para garantir a consistência dos dados (ex: ao apagar uma pergunta, as suas opções são automaticamente removidas).
+
+Codificação: A base de dados e as tabelas foram configuradas com o charset utf8mb4 e a collation utf8mb4_unicode_ci para garantir o suporte completo a caracteres especiais e acentuação.
+
+3. Tecnologias Utilizadas (Tech Stack)
+Front-end:
+
+React (v18+): Biblioteca principal para a construção da interface de utilizador.
+
+Vite: Ferramenta de build e servidor de desenvolvimento, proporcionando um ambiente de desenvolvimento extremamente rápido com Hot Module Replacement (HMR).
+
+React Router (v6+): Biblioteca para a gestão do roteamento do lado do cliente.
+
+Tailwind CSS: Framework CSS "utility-first" para a estilização rápida e consistente da interface.
+
+Recharts: Biblioteca para a criação de gráficos interativos (utilizada no gráfico de progresso do Dashboard).
+
+Back-end:
+
+PHP: Linguagem de scripting do lado do servidor.
+
+PDO (PHP Data Objects): Extensão para a conexão segura com o banco de dados.
+
+Banco de Dados:
+
+MySQL: Sistema de gestão de banco de dados.
+
+Ambiente de Desenvolvimento:
+
+WAMP Server: Pacote de software local que inclui Apache (servidor web), PHP e MySQL.
+
+Node.js / npm: Gestor de pacotes para as dependências do projeto front-end.
+
+Visual Studio Code: Editor de código.
+
+4. Funcionalidades Implementadas
+Autenticação de Utilizador: Registo de novas contas e login com validação e hashing de senhas.
+
+Sistema de Gamificação:
+
+Quiz Interativo: O utilizador responde a perguntas baseadas no seu nível.
+
+Jogo Educativo: Simulação de cenários de gestão de projetos.
+
+Sistema de Níveis: Progressão de "Iniciante" a "Perito" com base no desempenho.
+
+Painel de Administração:
+
+Interface dedicada para utilizadores do tipo "Administrador".
+
+CRUD completo (Create, Read, Update, Delete) para perguntas do quiz.
+
+CRUD completo para cenários e opções do jogo educativo.
+
+Dashboard do Utilizador:
+
+Visualização do progresso geral (taxa de acerto, exercícios concluídos).
+
+Gráfico de progresso para o próximo nível.
+
+Gestão de Perfil:
+
+O utilizador pode editar o seu nome, email e senha.
+
+O utilizador pode apagar a sua própria conta de forma permanente.
+
+5. Conclusão
+A plataforma "Aventuras do Conhecimento" encontra-se num estado funcional e robusto, com um ciclo de vida de conteúdo e utilizador bem definido. A arquitetura desacoplada permite que o front-end e o back-end evoluam de forma independente. As tecnologias escolhidas são modernas, amplamente utilizadas no mercado e garantem uma boa performance e manutenibilidade.
+
+Como próximos passos, sugere-se a implementação de funcionalidades como a alteração do método de login para email e a criação de um sistema de ranking para o "Modo Competição".

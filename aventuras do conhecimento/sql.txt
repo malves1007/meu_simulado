@@ -1,0 +1,127 @@
+-- Cria o banco de dados 'simulados' se ele ainda não existir,
+-- com o conjunto de caracteres correto para suportar acentos e caracteres especiais.
+CREATE DATABASE IF NOT EXISTS simulados CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Seleciona o banco de dados recém-criado para que os comandos seguintes sejam executados nele.
+USE simulados;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Usuario`
+-- Armazena as informações de login e perfil dos usuários.
+--
+CREATE TABLE IF NOT EXISTS `Usuario` (
+  `cpf` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nome` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `senha` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Armazena o HASH da senha',
+  `tipo_conta` enum('Aluno','Administrador') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Aluno',
+  `nivel` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT 'Iniciante',
+  `teste_inicial_concluido` tinyint(1) DEFAULT '0',
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Perguntas`
+-- Armazena o enunciado e os detalhes de cada pergunta do quiz.
+--
+CREATE TABLE IF NOT EXISTS `Perguntas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enunciado` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dificuldade` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `explicacao` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Opcoes`
+-- Armazena as opções de resposta para cada pergunta.
+--
+CREATE TABLE IF NOT EXISTS `Opcoes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pergunta_id` int(11) NOT NULL,
+  `texto_opcao` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correta` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 para Falso, 1 para Verdadeiro',
+  PRIMARY KEY (`id`),
+  KEY `pergunta_id` (`pergunta_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `RespostasUsuario`
+-- Armazena o histórico de todas as respostas dadas pelos alunos.
+--
+CREATE TABLE IF NOT EXISTS `RespostasUsuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_cpf` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pergunta_id` int(11) NOT NULL,
+  `opcao_id` int(11) NOT NULL,
+  `acertou` tinyint(1) NOT NULL,
+  `data_resposta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `usuario_cpf` (`usuario_cpf`),
+  KEY `pergunta_id` (`pergunta_id`),
+  KEY `opcao_id` (`opcao_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `CenariosJogo`
+-- Armazena os cenários ou eventos para o jogo educativo.
+--
+CREATE TABLE IF NOT EXISTS `CenariosJogo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `texto_cenario` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `OpcoesJogo`
+-- Armazena as opções de decisão para cada cenário do jogo e seus efeitos.
+--
+CREATE TABLE IF NOT EXISTS `OpcoesJogo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cenario_id` int(11) NOT NULL,
+  `texto_opcao` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `efeito_orcamento` int(11) NOT NULL DEFAULT '0',
+  `efeito_cronograma` int(11) NOT NULL DEFAULT '0',
+  `efeito_moral` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `cenario_id` (`cenario_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Adicionando as chaves primárias e estrangeiras
+--
+
+-- Chave primária para a tabela `Usuario`
+ALTER TABLE `Usuario`
+  ADD PRIMARY KEY (`cpf`),
+  ADD UNIQUE KEY `email` (`email`);
+
+-- Chaves estrangeiras para a tabela `Opcoes`
+ALTER TABLE `Opcoes`
+  ADD CONSTRAINT `opcoes_ibfk_1` FOREIGN KEY (`pergunta_id`) REFERENCES `Perguntas` (`id`) ON DELETE CASCADE;
+
+-- Chaves estrangeiras para a tabela `RespostasUsuario`
+ALTER TABLE `RespostasUsuario`
+  ADD CONSTRAINT `respostasusuario_ibfk_1` FOREIGN KEY (`usuario_cpf`) REFERENCES `Usuario` (`cpf`) ON DELETE CASCADE,
+  ADD CONSTRAINT `respostasusuario_ibfk_2` FOREIGN KEY (`pergunta_id`) REFERENCES `Perguntas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `respostasusuario_ibfk_3` FOREIGN KEY (`opcao_id`) REFERENCES `Opcoes` (`id`) ON DELETE CASCADE;
+
+-- Chaves estrangeiras para a tabela `OpcoesJogo`
+ALTER TABLE `OpcoesJogo`
+  ADD CONSTRAINT `opcoesjogo_ibfk_1` FOREIGN KEY (`cenario_id`) REFERENCES `CenariosJogo` (`id`) ON DELETE CASCADE;
+
