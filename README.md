@@ -1,4 +1,5 @@
 # meu_simulado
+Projeto trabalhado na Disciplina projeto interdisciplinar 2 
 Aplicativo de Simulados personalizados, cliente que define, o que será realizado de questões.
 
 Aventuras do Conhecimento
@@ -110,4 +111,4 @@ Funcionalidades Sociais: Desenvolver um "Modo Competição" com rankings e permi
 Expansão de Conteúdo: Adicionar mais matérias e um sis
 
 
-link do jira https://estudantes-team-mbd77gg1.atlassian.net/jira/software/projects/KAN/list
+-----link do jira https://estudantes-team-mbd77gg1.atlassian.net/jira/software/projects/KAN/list
