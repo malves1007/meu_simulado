@@ -53,6 +53,8 @@ PDO (PHP Data Objects): Para uma conexão segura e padronizada com o banco de da
 Banco de Dados
 MySQL: Sistema de gestão de banco de dados relacional.
 
+----------------------------------------------------------------------------------------------------------
+
 Instalação e Configuração
 Para executar este projeto localmente, siga os passos abaixo.
 
@@ -64,7 +66,7 @@ Node.js e npm instalados.
 1. Configuração do Back-end
 Clone o repositório:
 
-git clone (https://github.com/malves1007/meu_simulado?tab=readme-ov-file)
+git clone (https://github.com/malves1007/meu_simulado)
 
 Mova a pasta do projeto para o diretório do seu servidor local (ex: C:\wamp64\www\).
 
@@ -100,6 +102,8 @@ Inicie o servidor de desenvolvimento:
 npm run dev
 
 Abra o seu navegador e aceda a http://localhost:5173 (ou o endereço indicado no terminal).
+
+----------------------------------------------------------------------------------------------------------
 
 Roadmap Futuro
 Monetização: Implementar Google AdSense e explorar modelos de subscrição.
